@@ -4,3 +4,8 @@
 - discriminability: spread of values measured through variance contributed from talent of each player. We want to use metrics to rank players otherwise it's only measuring differences in luck.  
 
     - How spread out are the players and how much of that spread is real talent. Because reliability can tell us the contribution of talent to the metric but if all players have very similar talent the metric becomes useless for ranking. 
+    - There's an issue with calculating coefficnet of variance (cv) in discriminability.R. The function doesn't consider what happens when calculating a metric with that has positive and negative values with a potential average of 0. Since coefficient of variance = standard deviation / mean. if we have a 0 or close to 0 mean our cv will blow up and start to be a meanigless number. 
+        - E.g: in baseball the metric WPA (Win Probability Added) has its average set to 0. Calculating cv for this metric will tell us nothing. 
+        - Proposal: 
+            1. We could either get rid of cv since we can get discriminability values from true_sd. cv doesn't really contribute to the question of discriminability directly since it uses observed standard deviation (which includes luck), this makes it not a fully controlled value to answer how players really differ. true_sd can be the main result of discriminability. 
+            2. We could keep cv and just put a warning whenever our metric has values less than or equal to 0. 
