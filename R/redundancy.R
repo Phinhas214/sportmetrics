@@ -54,7 +54,8 @@ test_redundancy <- function(data, outcome, traditional_vars, advanced_var) {
     paste(outcome, "~", paste(traditional_vars, collapse = " + "))
   )
   full_formula <- stats::as.formula(
-    paste(outcome, "~", paste(c(traditional_vars, advanced_var), collapse = " + "))
+    paste(outcome, "~", paste(c(traditional_vars, advanced_var), collapse =
+                                " + "))
   )
 
   baseline_model <- stats::lm(baseline_formula, data = data)

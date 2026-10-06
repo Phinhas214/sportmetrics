@@ -1,0 +1,6 @@
+- reliability using the split-half method It splits the player PAs into two piles multiple times, randomly shuffling them each time. Then it looks at player performance correlation between those piles. Luck is different in each pile so the only reason why those piles can correlate to each other is talent. Finally we combine both piles using Spearman-Brown prediction formula for split-half reliability adjustment -> aka more data = more stable metric. 
+    - Motivation behind this is that each players output has a mix of luck and talent. We want to know how much of the output driven by the talent. Shuffling the multiple times and splitting the data into two piles is going to reduce the effect of luck in the output metric. 
+
+- discriminability: spread of values measured through variance contributed from talent of each player. We want to use metrics to rank players otherwise it's only measuring differences in luck.  
+
+    - How spread out are the players and how much of that spread is real talent. Because reliability can tell us the contribution of talent to the metric but if all players have very similar talent the metric becomes useless for ranking. 
