@@ -9,3 +9,42 @@
         - Proposal: 
             1. We could either get rid of cv since we can get discriminability values from true_sd. cv doesn't really contribute to the question of discriminability directly since it uses observed standard deviation (which includes luck), this makes it not a fully controlled value to answer how players really differ. true_sd can be the main result of discriminability. 
             2. We could keep cv and just put a warning whenever our metric has values less than or equal to 0. 
+
+
+
+
+
+
+## `test_discriminability()`: cv is meaningless for metrics without a true zero (WPA, WAR, wRAA)
+
+### Problem
+There's an issue with calculating the coefficient of variation (cv) in `discriminability.R`. The function doesn't consider what happens when the metric doesn't have a true zero (a zero that means "none of it" instead of a 0 that is arbitrary, think of farenheit or celcius where 0 doesn't actually mean no heat). Since coefficient of variation = standard deviation / mean, moving where zero is changes the mean but not the spread, so the cv changes even though the players are exactly the same. If we have a 0 or close to 0 mean, our cv will blow up and become a meaningless number.
+
+- E.g.: in baseball the metric WPA (Win Probability Added) has its average set to 0. Calculating cv for this metric will tell us nothing.
+
+### Example
+```r
+df <- data.frame(wpa = c(1.8, -0.6, 0.3, -1.2, 0.2))
+r1 <- test_discriminability(df, "wpa")
+c(r1$sd, r1$cv)
+#> [1]  1.131371  11.313708
+
+df$wpa_minus_02 <- df$wpa - 0.2   # same players, zero moved by 0.2
+r2 <- test_discriminability(df, "wpa_minus_02")
+c(r2$sd, r2$cv)
+#> [1]   1.131371 -11.313708
+```
+
+
+We have the same spread (sd = 1.13), but cv goes from 11.3 to -11.3.
+
+
+Since the package is meant to be sport-agnostic, and a lot of metrics in other sports are also centered on 0 this issue will come up for every sport metric. 
+
+Proposal
+
+1. We could get rid of cv, since we can get discriminability values from `true_sd`. cv doesn't really contribute to the question of discriminability directly, since it uses observed standard deviation (which includes luck). This makes it not a fully controlled value to answer how players really differ through their talent alone. `true_sd` can be the main result of discriminability.
+2. We could keep cv and just add a warning whenever our metric has negative values (any(x < 0)).
+   - A warning can't catch every case (e.g. WPA + 10 has no negative values but cv is still meaningless), so we should also add a note in the docs that cv only makes sense when zero means "none of it".
+
+I'd lean towards option 1, since `true_sd` answers the discriminability question better.
