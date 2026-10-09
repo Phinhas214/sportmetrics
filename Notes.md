@@ -48,3 +48,11 @@ Proposal
    - A warning can't catch every case (e.g. WPA + 10 has no negative values but cv is still meaningless), so we should also add a note in the docs that cv only makes sense when zero means "none of it".
 
 I'd lean towards option 1, since `true_sd` answers the discriminability question better.
+
+
+
+
+- calculating H2 reliability for defense DRS (Defensive Runs Saved) metric doesn't use test_reliability because we can't get per game data fro DRS. This is because DRS is calculated for each season. There are no per game DRS values (only for seaons) so you can't divide DRS into two halves. 
+    - I'm using corellation between this season and the next to calculate H3 reliability scores. 
+    - expect correlation to be lower than H2 scores for offense metrics because there's more variability per player between each season (age, injury, position change)
+    - H3 discriminability scores also use this DRS score so H3 will also be affected downstream. 
