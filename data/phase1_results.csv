@@ -1,0 +1,20 @@
+"test","metric","result"
+"H1 offense","wRC+ vs AVG/HR/RBI","R2 0.23 -> 0.32, 
+        delta_r2 = 0.088,
+        p = 1.27e-17 (n = 608)"
+"H1 defense","DRS vs Fielding%","R2 0.00 -> 0.26,
+        delta_r2 = 0.256,
+        p = 6.23e-09 (n = 117)"
+"H2 offense","wOBA (per game, 2024)","spearman_brown_r = 0.53 (286 players)"
+"H2 defense (DRS)","DRS year-to-year","r = 0.51"
+"H2 defense (Fld%)","Fielding% year-to-year","r = 0.77"
+"H3 offense","wRC+ (2024)","sd = 24.2,
+        true_sd = 17.7,
+        cv = 0.23"
+"H3 defense (DRS)","DRS","mean = 1.6,
+        sd = 8.4,
+        true_sd = 6.0,
+        cv = 5.24"
+"H3 defense (Fld%)","Fielding%","sd = 0.0114,
+        true_sd = 0.0100,
+        cv = 0.012"
