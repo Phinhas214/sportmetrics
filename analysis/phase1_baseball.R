@@ -235,4 +235,5 @@ results <- data.frame(
   )
 )
 print(results, right = FALSE)
+View(results)
 write.csv(results, "data/phase1_results.csv", row.names = FALSE)

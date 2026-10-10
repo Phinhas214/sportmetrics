@@ -56,3 +56,24 @@ I'd lean towards option 1, since `true_sd` answers the discriminability question
     - I'm using corellation between this season and the next to calculate H3 reliability scores. 
     - expect correlation to be lower than H2 scores for offense metrics because there's more variability per player between each season (age, injury, position change)
     - H3 discriminability scores also use this DRS score so H3 will also be affected downstream. 
+  
+
+- Reliability scores are low maybe because we're filtering players whose PA >= 300. 
+  - Most likely only the better players will get chosen multiple times for PAs and the opposite for not that good players. 
+  - This means that we have a bias towards better players which makes our selected players similar to each other. 
+  - narrow talent spread
+  - max PAs/season record is 778 by Jimmy Rollins. 
+  
+  
+  
+  
+- needs to be discussed but I'm using these thresh holds for now
+- H1 redundant if p ≥ 0.05 or delta_r2 < 0.01
+- H2 too noisy if reliability < 0.5; moderate from 0.5 to 0.7; reliable from 0.7 
+- H3 no real spread if true_sd is too small to matter in the metric’s own units (this needs a judgment based on the metric used, I'm not too familiar with baseball metrics). 
+  
+
+
+
+
+
