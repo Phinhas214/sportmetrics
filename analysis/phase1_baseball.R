@@ -181,9 +181,11 @@ results <- data.frame(
   ),
   result = c(
     sprintf(
-        "R2 %.2f -> %.2f, 
-        delta_r2 = %.3f,
-        p = %.3g (n = %d)",
+        paste0(
+          "R2 %.2f -> %.2f, ",
+          "delta_r2 = %.3f, ",
+          "p = %.3g (n = %d)"
+        ),
         h1_off$baseline_r2,
         h1_off$full_r2,
         h1_off$delta_r2,
@@ -191,9 +193,11 @@ results <- data.frame(
         nrow(bat_pairs)
     ),
     sprintf(
-        "R2 %.2f -> %.2f,
-        delta_r2 = %.3f,
-        p = %.3g (n = %d)",
+        paste0(
+          "R2 %.2f -> %.2f, ",
+          "delta_r2 = %.3f, ",
+          "p = %.3g (n = %d)"
+        ),
         h1_def$baseline_r2,
         h1_def$full_r2,
         h1_def$delta_r2,
@@ -207,27 +211,33 @@ results <- data.frame(
     sprintf("r = %.2f", h2_def_drs),
     sprintf("r = %.2f", h2_def_fpct),
     sprintf(
-        "sd = %.1f,
-        true_sd = %.1f,
-        cv = %.2f",
+        paste0(
+          "sd = %.1f, ",
+          "true_sd = %.1f, ",
+          "cv = %.2f"
+        ),
         h3_off$sd,
         h3_off$true_sd,
         h3_off$cv
     ),
     sprintf(
-        "mean = %.1f,
-        sd = %.1f,
-        true_sd = %.1f,
-        cv = %.2f",
+        paste0(
+          "mean = %.1f, ",
+          "sd = %.1f, ",
+          "true_sd = %.1f, ",
+          "cv = %.2f"
+        ),
         h3_def$mean,
         h3_def$sd,
         h3_def$true_sd,
         h3_def$cv
     ),
     sprintf(
-        "sd = %.4f,
-        true_sd = %.4f,
-        cv = %.3f",
+        paste0(
+          "sd = %.4f, ",
+          "true_sd = %.4f, ",
+          "cv = %.3f"
+        ),
         h3_fpct$sd,
         h3_fpct$true_sd,
         h3_fpct$cv
